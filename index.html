@@ -14,750 +14,161 @@
     --violet: #9b5de5;
     --violet-pale: #c77dff;
     --blanc: #fff0f3;
-    --gris: #2a1520;
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
+  body { background: var(--noir); color: var(--blanc); font-family: 'Poppins', sans-serif; overflow-x: hidden; min-height: 100vh; }
 
-  body {
-    background: var(--noir);
-    color: var(--blanc);
-    font-family: 'Poppins', sans-serif;
-    overflow-x: hidden;
-    min-height: 100vh;
-  }
-
-  /* PARTICLES BG */
-  #particles {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
-  }
-
-  .petal {
-    position: absolute;
-    border-radius: 50% 0 50% 0;
-    animation: fall linear infinite;
-    opacity: 0;
-  }
-
+  #particles { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; overflow:hidden; }
+  .petal { position:absolute; border-radius:50% 0 50% 0; animation:fall linear infinite; opacity:0; }
   @keyframes fall {
-    0%   { transform: translateY(-60px) rotate(0deg);   opacity: 0; }
-    10%  { opacity: 0.6; }
-    90%  { opacity: 0.3; }
-    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    0%   { transform:translateY(-60px) rotate(0deg); opacity:0; }
+    10%  { opacity:0.6; }
+    90%  { opacity:0.3; }
+    100% { transform:translateY(110vh) rotate(720deg); opacity:0; }
   }
 
-  /* NAV */
   nav {
-    position: fixed;
-    top: 0; width: 100%;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 40px;
-    background: rgba(5,2,3,0.72);
-    backdrop-filter: blur(18px);
-    border-bottom: 1px solid rgba(255,77,125,0.18);
+    position:fixed; top:0; width:100%; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 40px;
+    background:rgba(5,2,3,0.72); backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,77,125,0.18);
   }
+  nav .logo { font-family:'Noto Serif JP',serif; font-size:1.1rem; color:var(--rose-neon); text-shadow:0 0 18px rgba(255,77,125,0.6); letter-spacing:2px; }
+  nav ul { display:flex; gap:28px; list-style:none; }
+  nav ul a { text-decoration:none; color:rgba(255,240,243,0.7); font-size:.82rem; letter-spacing:1px; text-transform:uppercase; transition:color .3s,text-shadow .3s; }
+  nav ul a:hover { color:var(--rose-neon); text-shadow:0 0 12px rgba(255,77,125,0.5); }
 
-  nav .logo {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 1.1rem;
-    color: var(--rose-neon);
-    text-shadow: 0 0 18px rgba(255,77,125,0.6);
-    letter-spacing: 2px;
-  }
+  .hero { position:relative; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 20px; z-index:1; overflow:hidden; }
+  .hero-bg { position:absolute; inset:0; background: radial-gradient(ellipse 80% 60% at 50% 100%,rgba(255,77,125,0.12) 0%,transparent 70%), radial-gradient(ellipse 60% 40% at 80% 20%,rgba(155,93,229,0.10) 0%,transparent 60%); }
+  .hero-kanji { font-family:'Noto Serif JP',serif; font-size:clamp(4rem,12vw,9rem); font-weight:900; line-height:1; background:linear-gradient(135deg,var(--rose-neon) 0%,var(--violet-pale) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; filter:drop-shadow(0 0 30px rgba(255,77,125,0.4)); animation:pulse-glow 3s ease-in-out infinite; }
+  @keyframes pulse-glow { 0%,100% { filter:drop-shadow(0 0 30px rgba(255,77,125,0.4)); } 50% { filter:drop-shadow(0 0 55px rgba(255,77,125,0.75)); } }
+  .hero-title { font-size:clamp(1rem,3vw,1.6rem); font-weight:300; letter-spacing:6px; text-transform:uppercase; color:var(--rose-pale); margin-top:8px; margin-bottom:18px; }
+  .hero-subtitle { font-size:.9rem; color:rgba(255,179,198,0.55); max-width:480px; line-height:1.7; margin-bottom:40px; }
+  .hero-buttons { display:flex; gap:16px; flex-wrap:wrap; justify-content:center; }
+  .btn { padding:13px 32px; border-radius:60px; font-size:.85rem; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none; cursor:pointer; border:none; transition:all .3s; position:relative; overflow:hidden; }
+  .btn::before { content:''; position:absolute; inset:0; background:rgba(255,255,255,0.1); transform:scaleX(0); transform-origin:left; transition:transform .3s; border-radius:60px; }
+  .btn:hover::before { transform:scaleX(1); }
+  .btn-primary { background:linear-gradient(135deg,var(--rose-neon),var(--rose-vif)); color:#fff; box-shadow:0 0 24px rgba(255,77,125,0.45),0 4px 16px rgba(0,0,0,0.4); }
+  .btn-primary:hover { box-shadow:0 0 40px rgba(255,77,125,0.7),0 4px 20px rgba(0,0,0,0.5); transform:translateY(-2px); }
+  .btn-secondary { background:rgba(155,93,229,0.12); color:var(--violet-pale); border:1px solid rgba(155,93,229,0.4); box-shadow:0 0 16px rgba(155,93,229,0.15); }
+  .btn-secondary:hover { background:rgba(155,93,229,0.22); box-shadow:0 0 28px rgba(155,93,229,0.35); transform:translateY(-2px); }
+  .hero-scroll { position:absolute; bottom:32px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:6px; color:rgba(255,179,198,0.4); font-size:.7rem; letter-spacing:2px; animation:bounce 2s ease-in-out infinite; }
+  .scroll-line { width:1px; height:48px; background:linear-gradient(to bottom,rgba(255,77,125,0.6),transparent); }
+  @keyframes bounce { 0%,100% { transform:translateX(-50%) translateY(0); } 50% { transform:translateX(-50%) translateY(8px); } }
 
-  nav .nav-links {
-    display: flex;
-    gap: 28px;
-    list-style: none;
-  }
+  section { position:relative; z-index:1; padding:80px 40px; max-width:1280px; margin:0 auto; }
+  .section-header { text-align:center; margin-bottom:56px; }
+  .section-tag { font-size:.7rem; letter-spacing:4px; text-transform:uppercase; color:var(--rose-neon); margin-bottom:12px; display:block; }
+  .section-title { font-family:'Noto Serif JP',serif; font-size:clamp(1.6rem,4vw,2.6rem); font-weight:700; color:var(--blanc); text-shadow:0 0 30px rgba(255,77,125,0.2); }
+  .section-title span { color:var(--rose-neon); }
+  .section-sep { width:80px; height:2px; background:linear-gradient(90deg,transparent,var(--rose-neon),transparent); margin:20px auto 0; }
+  .divider { width:100%; height:1px; background:linear-gradient(90deg,transparent,rgba(255,77,125,0.25),transparent); margin:0 auto; }
 
-  nav .nav-links a {
-    text-decoration: none;
-    color: rgba(255,240,243,0.7);
-    font-size: .82rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: color .3s, text-shadow .3s;
-  }
+  .cards-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:20px; }
 
-  nav .nav-links a:hover {
-    color: var(--rose-neon);
-    text-shadow: 0 0 12px rgba(255,77,125,0.5);
-  }
-
-  /* HERO */
-  .hero {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 0 20px;
-    z-index: 1;
-    overflow: hidden;
-  }
-
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 50% 100%, rgba(255,77,125,0.12) 0%, transparent 70%),
-      radial-gradient(ellipse 60% 40% at 80% 20%, rgba(155,93,229,0.10) 0%, transparent 60%);
-  }
-
-  .hero-kanji {
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(4rem, 12vw, 9rem);
-    font-weight: 900;
-    line-height: 1;
-    background: linear-gradient(135deg, var(--rose-neon) 0%, var(--violet-pale) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    filter: drop-shadow(0 0 30px rgba(255,77,125,0.4));
-    animation: pulse-glow 3s ease-in-out infinite;
-  }
-
-  @keyframes pulse-glow {
-    0%, 100% { filter: drop-shadow(0 0 30px rgba(255,77,125,0.4)); }
-    50%       { filter: drop-shadow(0 0 55px rgba(255,77,125,0.75)); }
-  }
-
-  .hero-title {
-    font-size: clamp(1rem, 3vw, 1.6rem);
-    font-weight: 300;
-    letter-spacing: 6px;
-    text-transform: uppercase;
-    color: var(--rose-pale);
-    margin-top: 8px;
-    margin-bottom: 18px;
-  }
-
-  .hero-subtitle {
-    font-size: .9rem;
-    color: rgba(255,179,198,0.55);
-    max-width: 480px;
-    line-height: 1.7;
-    margin-bottom: 40px;
-  }
-
-  .hero-buttons {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .btn {
-    padding: 13px 32px;
-    border-radius: 60px;
-    font-size: .85rem;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    text-decoration: none;
-    cursor: pointer;
-    border: none;
-    transition: all .3s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(255,255,255,0.1);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform .3s;
-    border-radius: 60px;
-  }
-
-  .btn:hover::before { transform: scaleX(1); }
-
-  .btn-primary {
-    background: linear-gradient(135deg, var(--rose-neon), var(--rose-vif));
-    color: #fff;
-    box-shadow: 0 0 24px rgba(255,77,125,0.45), 0 4px 16px rgba(0,0,0,0.4);
-  }
-
-  .btn-primary:hover {
-    box-shadow: 0 0 40px rgba(255,77,125,0.7), 0 4px 20px rgba(0,0,0,0.5);
-    transform: translateY(-2px);
-  }
-
-  .btn-secondary {
-    background: rgba(155,93,229,0.12);
-    color: var(--violet-pale);
-    border: 1px solid rgba(155,93,229,0.4);
-    box-shadow: 0 0 16px rgba(155,93,229,0.15);
-  }
-
-  .btn-secondary:hover {
-    background: rgba(155,93,229,0.22);
-    box-shadow: 0 0 28px rgba(155,93,229,0.35);
-    transform: translateY(-2px);
-  }
-
-  .hero-scroll {
-    position: absolute;
-    bottom: 32px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    color: rgba(255,179,198,0.4);
-    font-size: .7rem;
-    letter-spacing: 2px;
-    animation: bounce 2s ease-in-out infinite;
-  }
-
-  .scroll-line {
-    width: 1px;
-    height: 48px;
-    background: linear-gradient(to bottom, rgba(255,77,125,0.6), transparent);
-  }
-
-  @keyframes bounce {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50%       { transform: translateX(-50%) translateY(8px); }
-  }
-
-  /* SECTIONS */
-  section {
-    position: relative;
-    z-index: 1;
-    padding: 80px 40px;
-    max-width: 1280px;
-    margin: 0 auto;
-  }
-
-  .section-header {
-    text-align: center;
-    margin-bottom: 56px;
-  }
-
-  .section-tag {
-    font-size: .7rem;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--rose-neon);
-    margin-bottom: 12px;
-    display: block;
-  }
-
-  .section-title {
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(1.6rem, 4vw, 2.6rem);
-    font-weight: 700;
-    color: var(--blanc);
-    text-shadow: 0 0 30px rgba(255,77,125,0.2);
-  }
-
-  .section-title span {
-    color: var(--rose-neon);
-  }
-
-  .section-sep {
-    width: 80px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--rose-neon), transparent);
-    margin: 20px auto 0;
-  }
-
-  /* DIVIDER */
-  .divider {
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255,77,125,0.25), transparent);
-    margin: 0 auto;
-  }
-
-  /* CARDS GRID */
-  .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 24px;
-  }
-
-  /* CHARACTER CARD */
   .char-card {
-    position: relative;
-    border-radius: 18px;
-    overflow: hidden;
-    background: rgba(255,255,255,0.035);
-    border: 1px solid rgba(255,77,125,0.12);
-    backdrop-filter: blur(10px);
-    transition: all .4s cubic-bezier(.23, 1, .32, 1);
-    cursor: default;
-    aspect-ratio: 2/3;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    position:relative; border-radius:18px; overflow:hidden;
+    border:1px solid rgba(255,77,125,0.12);
+    transition:all .4s cubic-bezier(.23,1,.32,1); cursor:default;
+    aspect-ratio:2/3; display:flex; flex-direction:column; justify-content:flex-end;
   }
-
-  .char-card:hover {
-    transform: translateY(-10px) scale(1.03);
-    border-color: rgba(255,77,125,0.4);
-    box-shadow: 0 20px 50px rgba(255,77,125,0.2), 0 0 0 1px rgba(255,77,125,0.15);
-  }
+  .char-card:hover { transform:translateY(-10px) scale(1.03); border-color:rgba(255,77,125,0.4); box-shadow:0 20px 50px rgba(255,77,125,0.2),0 0 0 1px rgba(255,77,125,0.15); }
 
   .char-card-image {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform .5s cubic-bezier(.23, 1, .32, 1), filter .5s;
-    filter: brightness(.65) saturate(0.9);
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:top center;
+    transition:transform .5s cubic-bezier(.23,1,.32,1),filter .5s;
+    filter:brightness(.7) saturate(0.95);
+  }
+  .char-card:hover .char-card-image { transform:scale(1.07); filter:brightness(.85) saturate(1.1); }
+
+  .card-icon-fallback {
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-size:5rem; opacity:.15; z-index:1;
   }
 
-  .char-card:hover .char-card-image {
-    transform: scale(1.07);
-    filter: brightness(.8) saturate(1.1);
-  }
+  .char-card-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(5,2,3,0.96) 0%,rgba(5,2,3,0.4) 50%,rgba(5,2,3,0.05) 100%); z-index:2; }
+  .char-card-body { position:relative; z-index:3; padding:16px 14px; }
+  .char-badge { position:absolute; top:12px; right:12px; z-index:4; font-size:.6rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:5px 10px; border-radius:20px; backdrop-filter:blur(8px); }
+  .badge-libre { background:rgba(34,197,94,0.2); color:#4ade80; border:1px solid rgba(34,197,94,0.35); box-shadow:0 0 10px rgba(34,197,94,0.2); }
+  .badge-occupe { background:rgba(239,68,68,0.2); color:#f87171; border:1px solid rgba(239,68,68,0.35); box-shadow:0 0 10px rgba(239,68,68,0.2); }
+  .badge-wl { background:rgba(155,93,229,0.22); color:var(--violet-pale); border:1px solid rgba(155,93,229,0.4); box-shadow:0 0 10px rgba(155,93,229,0.25); }
+  .char-rank { font-size:.58rem; letter-spacing:2px; text-transform:uppercase; color:var(--rose-pale); opacity:.7; margin-bottom:3px; }
+  .char-name-fr { font-family:'Noto Serif JP',serif; font-size:.95rem; font-weight:700; color:var(--blanc); line-height:1.2; }
+  .char-name-jp { font-family:'Noto Serif JP',serif; font-size:.72rem; color:var(--rose-pale); opacity:.6; margin-top:2px; }
+  .char-element { margin-top:7px; font-size:.62rem; color:var(--rose-neon); letter-spacing:.5px; display:flex; align-items:center; gap:5px; }
+  .char-element::before { content:''; display:inline-block; width:14px; height:1px; background:var(--rose-neon); box-shadow:0 0 6px var(--rose-neon); flex-shrink:0; }
 
-  .char-card-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(5,2,3,0.92) 0%, rgba(5,2,3,0.3) 55%, transparent 100%);
-    transition: opacity .4s;
-  }
+  .char-card.lune { border-color:rgba(155,93,229,0.15); }
+  .char-card.lune:hover { border-color:rgba(155,93,229,0.45); box-shadow:0 20px 50px rgba(155,93,229,0.2),0 0 0 1px rgba(155,93,229,0.2); }
+  .char-card.lune .char-element { color:var(--violet-pale); }
+  .char-card.lune .char-element::before { background:var(--violet-pale); box-shadow:0 0 6px var(--violet-pale); }
 
-  .char-card:hover .char-card-overlay {
-    background: linear-gradient(to top, rgba(5,2,3,0.96) 0%, rgba(5,2,3,0.35) 60%, transparent 100%);
-  }
+  #whitelist { background:rgba(155,93,229,0.04); border-top:1px solid rgba(155,93,229,0.1); border-bottom:1px solid rgba(155,93,229,0.1); }
+  .wl-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:20px; }
+  .wl-card { background:rgba(155,93,229,0.06); border:1px solid rgba(155,93,229,0.18); border-radius:16px; padding:24px 22px; transition:all .35s; position:relative; overflow:hidden; }
+  .wl-card::before { content:''; position:absolute; top:0; left:0; width:3px; height:100%; background:linear-gradient(to bottom,var(--violet),transparent); }
+  .wl-card:hover { background:rgba(155,93,229,0.11); border-color:rgba(155,93,229,0.35); transform:translateX(4px); box-shadow:-4px 0 20px rgba(155,93,229,0.15); }
+  .wl-souffle { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+  .wl-icon { width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.3rem; background:rgba(155,93,229,0.15); border:1px solid rgba(155,93,229,0.25); flex-shrink:0; }
+  .wl-souffle-name { font-family:'Noto Serif JP',serif; font-size:1rem; font-weight:700; color:var(--violet-pale); }
+  .wl-souffle-jp { font-size:.72rem; color:rgba(199,125,255,0.5); margin-top:1px; }
+  .wl-desc { font-size:.8rem; color:rgba(255,240,243,0.55); line-height:1.65; margin-bottom:16px; }
+  .wl-formateur { display:flex; align-items:center; justify-content:space-between; background:rgba(5,2,3,0.45); border-radius:10px; padding:10px 14px; border:1px solid rgba(155,93,229,0.12); }
+  .wl-formateur-label { font-size:.65rem; letter-spacing:1.5px; text-transform:uppercase; color:rgba(199,125,255,0.5); margin-bottom:2px; }
+  .wl-formateur-name { font-size:.85rem; font-weight:600; color:var(--violet-pale); }
+  .wl-status-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+  .dot-active { background:#4ade80; box-shadow:0 0 8px rgba(74,222,128,0.6); animation:blink 2s ease-in-out infinite; }
+  .dot-vacant { background:#f87171; box-shadow:0 0 8px rgba(248,113,113,0.5); }
+  @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:.4; } }
 
-  .char-card-body {
-    position: relative;
-    z-index: 2;
-    padding: 18px 16px;
-  }
+  .regles-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:20px; }
+  .regle-card { background:rgba(255,77,125,0.04); border:1px solid rgba(255,77,125,0.1); border-radius:14px; padding:22px 20px; transition:all .3s; }
+  .regle-card:hover { background:rgba(255,77,125,0.08); border-color:rgba(255,77,125,0.22); }
+  .regle-num { font-size:2.5rem; font-weight:700; color:rgba(255,77,125,0.15); font-family:'Noto Serif JP',serif; line-height:1; margin-bottom:10px; }
+  .regle-title { font-size:.9rem; font-weight:600; color:var(--rose-pale); margin-bottom:8px; }
+  .regle-text { font-size:.78rem; color:rgba(255,240,243,0.45); line-height:1.7; }
 
-  .char-badge {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    z-index: 3;
-    font-size: .62rem;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 5px 11px;
-    border-radius: 20px;
-    backdrop-filter: blur(8px);
-  }
+  #toast { position:fixed; bottom:30px; right:30px; z-index:9999; background:rgba(255,77,125,0.15); border:1px solid rgba(255,77,125,0.4); backdrop-filter:blur(14px); color:var(--rose-pale); padding:14px 22px; border-radius:12px; font-size:.82rem; font-weight:500; box-shadow:0 0 30px rgba(255,77,125,0.2); transform:translateY(80px); opacity:0; transition:all .45s cubic-bezier(.23,1,.32,1); pointer-events:none; }
+  #toast.show { transform:translateY(0); opacity:1; }
 
-  .badge-libre {
-    background: rgba(34,197,94,0.2);
-    color: #4ade80;
-    border: 1px solid rgba(34,197,94,0.35);
-    box-shadow: 0 0 10px rgba(34,197,94,0.2);
-  }
+  footer { position:relative; z-index:1; text-align:center; padding:50px 20px 36px; border-top:1px solid rgba(255,77,125,0.1); }
+  .footer-logo { font-family:'Noto Serif JP',serif; font-size:1.8rem; color:var(--rose-neon); text-shadow:0 0 20px rgba(255,77,125,0.4); margin-bottom:10px; }
+  .footer-text { font-size:.75rem; color:rgba(255,179,198,0.3); letter-spacing:1px; }
 
-  .badge-occupe {
-    background: rgba(239,68,68,0.2);
-    color: #f87171;
-    border: 1px solid rgba(239,68,68,0.35);
-    box-shadow: 0 0 10px rgba(239,68,68,0.2);
-  }
+  .filter-tabs { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:40px; }
+  .tab-btn { padding:8px 22px; border-radius:30px; font-size:.75rem; font-weight:600; letter-spacing:1px; text-transform:uppercase; border:1px solid rgba(255,77,125,0.2); background:transparent; color:rgba(255,179,198,0.55); cursor:pointer; transition:all .3s; }
+  .tab-btn:hover,.tab-btn.active { background:rgba(255,77,125,0.12); border-color:rgba(255,77,125,0.45); color:var(--rose-pale); box-shadow:0 0 14px rgba(255,77,125,0.12); }
 
-  .badge-wl {
-    background: rgba(155,93,229,0.22);
-    color: var(--violet-pale);
-    border: 1px solid rgba(155,93,229,0.4);
-    box-shadow: 0 0 10px rgba(155,93,229,0.25);
-  }
+  .stats-bar { display:flex; justify-content:center; gap:40px; flex-wrap:wrap; margin:0 auto 70px; padding:22px 36px; background:rgba(255,255,255,0.025); border:1px solid rgba(255,77,125,0.1); border-radius:18px; backdrop-filter:blur(8px); max-width:700px; }
+  .stat-item { text-align:center; }
+  .stat-value { font-size:1.9rem; font-weight:700; font-family:'Noto Serif JP',serif; color:var(--rose-neon); text-shadow:0 0 16px rgba(255,77,125,0.5); line-height:1; }
+  .stat-label { font-size:.65rem; letter-spacing:2px; text-transform:uppercase; color:rgba(255,179,198,0.45); margin-top:4px; }
 
-  .char-rank {
-    font-size: .65rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--rose-pale);
-    opacity: 0.7;
-    margin-bottom: 4px;
-  }
+  .img-tip { background:rgba(255,77,125,0.06); border:1px solid rgba(255,77,125,0.18); border-radius:12px; padding:16px 20px; margin-bottom:36px; font-size:.79rem; color:rgba(255,179,198,0.65); line-height:1.75; }
+  .img-tip strong { color:var(--rose-pale); }
+  .img-tip code { background:rgba(255,77,125,0.15); padding:2px 7px; border-radius:5px; font-size:.75rem; color:var(--rose-neon); }
 
-  .char-name-fr {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--blanc);
-    line-height: 1.2;
-  }
-
-  .char-name-jp {
-    font-family: 'Noto Serif JP', serif;
-    font-size: .78rem;
-    color: var(--rose-pale);
-    opacity: 0.6;
-    margin-top: 2px;
-  }
-
-  .char-element {
-    margin-top: 8px;
-    font-size: .68rem;
-    color: var(--rose-neon);
-    letter-spacing: 1px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-
-  .char-element::before {
-    content: '';
-    display: inline-block;
-    width: 18px;
-    height: 1px;
-    background: var(--rose-neon);
-    box-shadow: 0 0 6px var(--rose-neon);
-  }
-
-  /* LUNE CARD (dark variant) */
-  .char-card.lune {
-    border-color: rgba(155,93,229,0.15);
-  }
-
-  .char-card.lune:hover {
-    border-color: rgba(155,93,229,0.45);
-    box-shadow: 0 20px 50px rgba(155,93,229,0.2), 0 0 0 1px rgba(155,93,229,0.2);
-  }
-
-  .char-card.lune .char-element {
-    color: var(--violet-pale);
-  }
-
-  .char-card.lune .char-element::before {
-    background: var(--violet-pale);
-    box-shadow: 0 0 6px var(--violet-pale);
-  }
-
-  /* WHITELIST SECTION */
-  #whitelist {
-    background: rgba(155,93,229,0.04);
-    border-top: 1px solid rgba(155,93,229,0.1);
-    border-bottom: 1px solid rgba(155,93,229,0.1);
-  }
-
-  .wl-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-  }
-
-  .wl-card {
-    background: rgba(155,93,229,0.06);
-    border: 1px solid rgba(155,93,229,0.18);
-    border-radius: 16px;
-    padding: 24px 22px;
-    backdrop-filter: blur(8px);
-    transition: all .35s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .wl-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 3px;
-    height: 100%;
-    background: linear-gradient(to bottom, var(--violet), transparent);
-    border-radius: 4px;
-  }
-
-  .wl-card:hover {
-    background: rgba(155,93,229,0.11);
-    border-color: rgba(155,93,229,0.35);
-    transform: translateX(4px);
-    box-shadow: -4px 0 20px rgba(155,93,229,0.15);
-  }
-
-  .wl-souffle {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 14px;
-  }
-
-  .wl-icon {
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.3rem;
-    background: rgba(155,93,229,0.15);
-    border: 1px solid rgba(155,93,229,0.25);
-    flex-shrink: 0;
-  }
-
-  .wl-souffle-name {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--violet-pale);
-  }
-
-  .wl-souffle-jp {
-    font-size: .72rem;
-    color: rgba(199,125,255,0.5);
-    margin-top: 1px;
-  }
-
-  .wl-desc {
-    font-size: .8rem;
-    color: rgba(255,240,243,0.55);
-    line-height: 1.65;
-    margin-bottom: 16px;
-  }
-
-  .wl-formateur {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: rgba(5,2,3,0.45);
-    border-radius: 10px;
-    padding: 10px 14px;
-    border: 1px solid rgba(155,93,229,0.12);
-  }
-
-  .wl-formateur-label {
-    font-size: .65rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: rgba(199,125,255,0.5);
-    margin-bottom: 2px;
-  }
-
-  .wl-formateur-name {
-    font-size: .85rem;
-    font-weight: 600;
-    color: var(--violet-pale);
-  }
-
-  .wl-status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .dot-active {
-    background: #4ade80;
-    box-shadow: 0 0 8px rgba(74,222,128,0.6);
-    animation: blink 2s ease-in-out infinite;
-  }
-
-  .dot-vacant {
-    background: #f87171;
-    box-shadow: 0 0 8px rgba(248,113,113,0.5);
-  }
-
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0.4; }
-  }
-
-  /* REGLES */
-  .regles-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 20px;
-  }
-
-  .regle-card {
-    background: rgba(255,77,125,0.04);
-    border: 1px solid rgba(255,77,125,0.1);
-    border-radius: 14px;
-    padding: 22px 20px;
-    transition: all .3s;
-  }
-
-  .regle-card:hover {
-    background: rgba(255,77,125,0.08);
-    border-color: rgba(255,77,125,0.22);
-  }
-
-  .regle-num {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: rgba(255,77,125,0.15);
-    font-family: 'Noto Serif JP', serif;
-    line-height: 1;
-    margin-bottom: 10px;
-  }
-
-  .regle-title {
-    font-size: .9rem;
-    font-weight: 600;
-    color: var(--rose-pale);
-    margin-bottom: 8px;
-  }
-
-  .regle-text {
-    font-size: .78rem;
-    color: rgba(255,240,243,0.45);
-    line-height: 1.7;
-  }
-
-  /* TOAST */
-  #toast {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 9999;
-    background: rgba(255,77,125,0.15);
-    border: 1px solid rgba(255,77,125,0.4);
-    backdrop-filter: blur(14px);
-    color: var(--rose-pale);
-    padding: 14px 22px;
-    border-radius: 12px;
-    font-size: .82rem;
-    font-weight: 500;
-    box-shadow: 0 0 30px rgba(255,77,125,0.2);
-    transform: translateY(80px);
-    opacity: 0;
-    transition: all .45s cubic-bezier(.23,1,.32,1);
-    pointer-events: none;
-  }
-
-  #toast.show {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
-  /* FOOTER */
-  footer {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    padding: 50px 20px 36px;
-    border-top: 1px solid rgba(255,77,125,0.1);
-  }
-
-  .footer-logo {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 1.8rem;
-    color: var(--rose-neon);
-    text-shadow: 0 0 20px rgba(255,77,125,0.4);
-    margin-bottom: 10px;
-  }
-
-  .footer-text {
-    font-size: .75rem;
-    color: rgba(255,179,198,0.3);
-    letter-spacing: 1px;
-  }
-
-  /* FILTER TABS */
-  .filter-tabs {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 40px;
-  }
-
-  .tab-btn {
-    padding: 8px 22px;
-    border-radius: 30px;
-    font-size: .75rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    border: 1px solid rgba(255,77,125,0.2);
-    background: transparent;
-    color: rgba(255,179,198,0.55);
-    cursor: pointer;
-    transition: all .3s;
-  }
-
-  .tab-btn:hover,
-  .tab-btn.active {
-    background: rgba(255,77,125,0.12);
-    border-color: rgba(255,77,125,0.45);
-    color: var(--rose-pale);
-    box-shadow: 0 0 14px rgba(255,77,125,0.12);
-  }
-
-  /* STATS BAR */
-  .stats-bar {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
-    margin: 0 auto 70px;
-    padding: 22px 36px;
-    background: rgba(255,255,255,0.025);
-    border: 1px solid rgba(255,77,125,0.1);
-    border-radius: 18px;
-    backdrop-filter: blur(8px);
-    max-width: 700px;
-  }
-
-  .stat-item {
-    text-align: center;
-  }
-
-  .stat-value {
-    font-size: 1.9rem;
-    font-weight: 700;
-    font-family: 'Noto Serif JP', serif;
-    color: var(--rose-neon);
-    text-shadow: 0 0 16px rgba(255,77,125,0.5);
-    line-height: 1;
-  }
-
-  .stat-label {
-    font-size: .65rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(255,179,198,0.45);
-    margin-top: 4px;
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    nav { padding: 14px 20px; }
-    nav .nav-links { display: none; }
-    section { padding: 60px 20px; }
-    .cards-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    .stats-bar { gap: 24px; padding: 18px 20px; }
-    .hero-buttons { flex-direction: column; align-items: center; }
-    .btn { width: 220px; text-align: center; }
-  }
-
-  @media (max-width: 420px) {
-    .cards-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width:768px) {
+    nav { padding:14px 20px; }
+    nav ul { display:none; }
+    section { padding:60px 20px; }
+    .cards-grid { grid-template-columns:repeat(2,1fr); gap:12px; }
+    .stats-bar { gap:24px; padding:18px 20px; }
+    .hero-buttons { flex-direction:column; align-items:center; }
+    .btn { width:220px; text-align:center; }
   }
 </style>
 </head>
 <body>
 
-<!-- PARTICULES SAKURA -->
 <div id="particles"></div>
 
-<!-- NAV -->
 <nav>
   <div class="logo">yufu.fr — RP</div>
-  <ul class="nav-links">
+  <ul>
     <li><a href="#piliers">Piliers</a></li>
     <li><a href="#lunes">Lunes</a></li>
     <li><a href="#whitelist">WhiteList</a></li>
@@ -765,48 +176,31 @@
   </ul>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
-  <p style="font-size:.75rem; letter-spacing:5px; color: rgba(255,179,198,0.4); text-transform:uppercase; margin-bottom:16px;">Garry's Mod — Serveur Roleplay</p>
+  <p style="font-size:.75rem;letter-spacing:5px;color:rgba(255,179,198,0.4);text-transform:uppercase;margin-bottom:16px;">Garry's Mod — Serveur Roleplay</p>
   <h1 class="hero-kanji">鬼滅の刃</h1>
   <h2 class="hero-title">Demon Slayer — Disponibilités RP</h2>
   <p class="hero-subtitle">Découvrez les rôles disponibles sur notre serveur Garry's Mod. Piliers, Lunes Démoniaques et formations aux Souffles — une aventure immersive vous attend.</p>
   <div class="hero-buttons">
-    <a href="https://discord.gg/" class="btn btn-primary" target="_blank">Rejoindre le Discord</a>
+    <a href="https://discord.gg/GuTxnPtUc7" class="btn btn-primary" target="_blank">Rejoindre le Discord</a>
     <button class="btn btn-secondary" onclick="copyIP()">Copier l'IP du Serveur</button>
   </div>
-  <div class="hero-scroll">
-    <div class="scroll-line"></div>
-    <span>Défiler</span>
-  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div><span>Défiler</span></div>
 </section>
 
 <div class="divider"></div>
 
-<!-- STATS -->
-<section style="padding: 60px 40px 20px;">
+<section style="padding:60px 40px 20px;">
   <div class="stats-bar">
-    <div class="stat-item">
-      <div class="stat-value" id="stat-libre">—</div>
-      <div class="stat-label">Rôles libres</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-value" id="stat-occupe">—</div>
-      <div class="stat-label">Rôles occupés</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-value" id="stat-wl">—</div>
-      <div class="stat-label">Souffles WL</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-value" id="stat-formateurs">—</div>
-      <div class="stat-label">Formateurs actifs</div>
-    </div>
+    <div class="stat-item"><div class="stat-value" id="stat-libre">—</div><div class="stat-label">Rôles libres</div></div>
+    <div class="stat-item"><div class="stat-value" id="stat-occupe">—</div><div class="stat-label">Rôles occupés</div></div>
+    <div class="stat-item"><div class="stat-value" id="stat-wl">—</div><div class="stat-label">Souffles WL</div></div>
+    <div class="stat-item"><div class="stat-value" id="stat-formateurs">—</div><div class="stat-label">Formateurs actifs</div></div>
   </div>
 </section>
 
-<!-- ===== PILIERS ===== -->
+<!-- PILIERS -->
 <section id="piliers">
   <div class="section-header">
     <span class="section-tag">Corps des Piliers</span>
@@ -814,51 +208,55 @@
     <div class="section-sep"></div>
   </div>
 
-  <div class="filter-tabs">
-    <button class="tab-btn active" onclick="filterCards('piliers', 'tous', this)">Tous</button>
-    <button class="tab-btn" onclick="filterCards('piliers', 'libre', this)">Libres</button>
-    <button class="tab-btn" onclick="filterCards('piliers', 'occupe', this)">Occupés</button>
-    <button class="tab-btn" onclick="filterCards('piliers', 'wl', this)">WL</button>
+  <div class="img-tip">
+    💡 <strong>Comment ajouter une image ?</strong><br>
+    Dans le tableau <code>PILIERS</code> (ou <code>LUNES</code>) du script en bas de page, chaque personnage a un champ <code>img: ''</code>.<br>
+    Colle-y une URL directe vers une image PNG/JPG. Sources recommandées : <strong>Imgur</strong> · <strong>CDN Discord</strong> · <strong>PostImages.org</strong> · ton propre hébergeur.<br>
+    Exemple : <code>img: 'https://i.imgur.com/XXXXXXX.png'</code> — Format portrait 400×600 px conseillé.
   </div>
 
+  <div class="filter-tabs">
+    <button class="tab-btn active" onclick="filterCards('piliers','tous',this)">Tous</button>
+    <button class="tab-btn" onclick="filterCards('piliers','libre',this)">Libres</button>
+    <button class="tab-btn" onclick="filterCards('piliers','occupe',this)">Occupés</button>
+    <button class="tab-btn" onclick="filterCards('piliers','wl',this)">WL</button>
+  </div>
   <div class="cards-grid" id="piliers-grid"></div>
 </section>
 
 <div class="divider"></div>
 
-<!-- ===== LUNES ===== -->
+<!-- LUNES -->
 <section id="lunes">
   <div class="section-header">
     <span class="section-tag">Douze Lunes Démoniaques</span>
     <h2 class="section-title">Les <span>Lunes</span> de Muzan</h2>
     <div class="section-sep"></div>
   </div>
-
   <div class="filter-tabs">
-    <button class="tab-btn active" onclick="filterCards('lunes', 'tous', this)">Tous</button>
-    <button class="tab-btn" onclick="filterCards('lunes', 'libre', this)">Libres</button>
-    <button class="tab-btn" onclick="filterCards('lunes', 'occupe', this)">Occupés</button>
-    <button class="tab-btn" onclick="filterCards('lunes', 'wl', this)">WL</button>
+    <button class="tab-btn active" onclick="filterCards('lunes','tous',this)">Tous</button>
+    <button class="tab-btn" onclick="filterCards('lunes','libre',this)">Libres</button>
+    <button class="tab-btn" onclick="filterCards('lunes','occupe',this)">Occupés</button>
+    <button class="tab-btn" onclick="filterCards('lunes','wl',this)">WL</button>
   </div>
-
   <div class="cards-grid" id="lunes-grid"></div>
 </section>
 
 <div class="divider"></div>
 
-<!-- ===== WHITELIST ===== -->
-<section id="whitelist" style="padding: 80px 40px; max-width:1280px; margin:0 auto;">
+<!-- WHITELIST -->
+<section id="whitelist" style="padding:80px 40px;max-width:1280px;margin:0 auto;">
   <div class="section-header">
-    <span class="section-tag" style="color: var(--violet-pale);">Formations Spéciales</span>
-    <h2 class="section-title" style="text-shadow: 0 0 30px rgba(155,93,229,0.25);">Souffles & <span style="color:var(--violet-pale)">WhiteList</span></h2>
-    <div class="section-sep" style="background: linear-gradient(90deg, transparent, var(--violet-pale), transparent);"></div>
+    <span class="section-tag" style="color:var(--violet-pale);">Formations Spéciales</span>
+    <h2 class="section-title" style="text-shadow:0 0 30px rgba(155,93,229,0.25);">Souffles &amp; <span style="color:var(--violet-pale)">WhiteList</span></h2>
+    <div class="section-sep" style="background:linear-gradient(90deg,transparent,var(--violet-pale),transparent);"></div>
   </div>
   <div class="wl-grid" id="wl-grid"></div>
 </section>
 
 <div class="divider"></div>
 
-<!-- ===== RÈGLES ===== -->
+<!-- RÈGLES -->
 <section id="regles">
   <div class="section-header">
     <span class="section-tag">Charte</span>
@@ -868,95 +266,93 @@
   <div class="regles-grid" id="regles-grid"></div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-logo">鬼滅の刃</div>
-  <p class="footer-text">Demon Slayer RP — Garry's Mod · Design par yufu.us Studio</p>
-  <p class="footer-text" style="margin-top: 6px; font-size:.65rem;">© 2025 — Toute reproduction interdite</p>
+  <p class="footer-text">Demon Slayer RP — Garry's Mod · yufu.fr Studio</p>
+  <p class="footer-text" style="margin-top:6px;font-size:.65rem;">© 2026 — Toute reproduction interdite</p>
 </footer>
 
-<!-- TOAST -->
 <div id="toast">✓ IP copiée dans le presse-papier !</div>
 
 <script>
-// ─── DATA ─────────────────────────────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════════════════
+//  📌 PILIERS — Pour ajouter une image : img: 'https://ton-url.com/img.png'
+//  Laisse img:'' pour afficher le placeholder coloré automatique
+// ════════════════════════════════════════════════════════════════════════
 const PILIERS = [
-  { nom:'Tanjiro Kamado', jp:'竈門 炭治郎', rang:'Pilier de l\'Eau (Remplaçant)', element:'Souffle de l\'Eau', statut:'libre',
-    img:'https://upload.wikimedia.org/wikipedia/en/0/08/Tanjiro_Kamado.png' },
-  { nom:'Giyu Tomioka', jp:'冨岡 義勇', rang:'Pilier de l\'Eau', element:'Souffle de l\'Eau', statut:'occupe',
-    img:'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/3/3a/Giyu_anime.png' },
-  { nom:'Kyojuro Rengoku', jp:'煉獄 杏寿郎', rang:'Pilier de la Flamme', element:'Souffle des Flammes', statut:'libre',
-    img:'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/1/13/Kyojuro_Rengoku_anime.png' },
-  { nom:'Tengen Uzui', jp:'宇髄 天元', rang:'Pilier du Son', element:'Souffle du Son', statut:'wl',
-    img:'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/5/5b/Tengen_Uzui.png' },
-  { nom:'Mitsuri Kanroji', jp:'甘露寺 蜜璃', rang:'Pilier de l\'Amour', element:'Souffle de l\'Amour', statut:'libre',
-    img:'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/3/38/Mitsuri_Kanroji_anime.png' },
-  { nom:'Muichiro Tokito', jp:'時透 無一郎', rang:'Pilier de la Brume', element:'Souffle de la Brume', statut:'occupe',
-    img:'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/3/36/Muichiro_Tokito.png' },
-  { nom:'Gyomei Himejima', jp:'悲鳴嶼 行冥', rang:'Pilier de la Roche', element:'Souffle de la Roche', statut:'wl',
-    img:'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/1/10/Gyomei_Himejima.png' },
-  { nom:'Obanai Iguro', jp:'伊黒 小芭内', rang:'Pilier du Serpent', element:'Souffle du Serpent', statut:'libre',
-    img:'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/b/b8/Obanai_Iguro.png' },
-  { nom:'Sanemi Shinazugawa', jp:'不死川 実弥', rang:'Pilier du Vent', element:'Souffle du Vent', statut:'occupe',
-    img:'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/f/f9/Sanemi_Shinazugawa.png' },
+  { nom:'Giyu Tomioka',       jp:'冨岡 義勇',   rang:'Pilier de l\'Eau',      element:'Souffle de l\'Eau · 水の呼吸',      statut:'occupe', couleur:'#0d4a80', icone:'💧', img:'' },
+  { nom:'Kyojuro Rengoku',    jp:'煉獄 杏寿郎', rang:'Pilier de la Flamme',   element:'Souffle des Flammes · 炎の呼吸',    statut:'libre',  couleur:'#8a3a0a', icone:'🔥', img:'' },
+  { nom:'Tengen Uzui',        jp:'宇髄 天元',   rang:'Pilier du Son',          element:'Souffle du Son · 音の呼吸',         statut:'wl',     couleur:'#7a6a10', icone:'🎵', img:'' },
+  { nom:'Mitsuri Kanroji',    jp:'甘露寺 蜜璃', rang:'Pilier de l\'Amour',    element:'Souffle de l\'Amour · 恋の呼吸',    statut:'libre',  couleur:'#8a1a5a', icone:'🌸', img:'' },
+  { nom:'Muichiro Tokito',    jp:'時透 無一郎', rang:'Pilier de la Brume',    element:'Souffle de la Brume · 霞の呼吸',    statut:'occupe', couleur:'#0d6a7a', icone:'🌫️', img:'' },
+  { nom:'Gyomei Himejima',    jp:'悲鳴嶼 行冥', rang:'Pilier de la Roche',    element:'Souffle de la Roche · 岩の呼吸',    statut:'wl',     couleur:'#4a3010', icone:'🪨', img:'' },
+  { nom:'Obanai Iguro',       jp:'伊黒 小芭内', rang:'Pilier du Serpent',      element:'Souffle du Serpent · 蛇の呼吸',     statut:'libre',  couleur:'#3a1a6a', icone:'🐍', img:'' },
+  { nom:'Sanemi Shinazugawa', jp:'不死川 実弥', rang:'Pilier du Vent',         element:'Souffle du Vent · 風の呼吸',        statut:'occupe', couleur:'#1a5a2a', icone:'🌬️', img:'' },
+  { nom:'Shinobu Kocho',      jp:'胡蝶 しのぶ', rang:'Pilier de l\'Insecte',  element:'Souffle de l\'Insecte · 蟲の呼吸',  statut:'libre',  couleur:'#6a1a8a', icone:'🦋', img:'' },
 ];
 
+// ════════════════════════════════════════════════════════════════════════
+//  📌 LUNES DÉMONIAQUES — Supérieures, Inférieures + Muzan
+// ════════════════════════════════════════════════════════════════════════
 const LUNES = [
-  { nom:'Kokushibo', jp:'黒死牟', rang:'Lune Supérieure I', element:'Souffle de la Lune', statut:'occupe',
-    img:'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/2/26/Kokushibo_anime.png' },
-  { nom:'Doma', jp:'童磨', rang:'Lune Supérieure II', element:'Art du Sang — Givre', statut:'libre',
-    img:'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/0/03/Doma.png' },
-  { nom:'Akaza', jp:'猗窩座', rang:'Lune Supérieure III', element:'Art du Sang — Techniques de Destruction', statut:'occupe',
-    img:'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/d/d7/Akaza_anime.png' },
-  { nom:'Nakime', jp:'鳴女', rang:'Lune Supérieure IV', element:'Art du Sang — Château Infini', statut:'libre',
-    img:'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/4/40/Nakime_anime.png' },
-  { nom:'Gyokko', jp:'玉壺', rang:'Lune Supérieure V', element:'Art du Sang — Vases', statut:'wl',
-    img:'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/4/40/Gyokko.png' },
-  { nom:'Daki & Gyutaro', jp:'堕姫・妓夫太郎', rang:'Lune Supérieure VI', element:'Art du Sang — Ceintures', statut:'libre',
-    img:'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/f/fa/Daki.png' },
-  { nom:'Enmu', jp:'魘夢', rang:'Lune Inférieure I', element:'Art du Sang — Rêves', statut:'libre',
-    img:'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/0/06/Enmu.png' },
-  { nom:'Kaigaku', jp:'獪岳', rang:'Lune Supérieure VI (alt)', element:'Souffle du Tonnerre Démoniaque', statut:'wl',
-    img:'https://static.wikia.nocookie.net/kimetsu-no-yaiba/images/9/9b/Kaigaku.png' },
+  { nom:'Kokushibo',   jp:'黒死牟',       rang:'Lune Supérieure I',              element:'Souffle de la Lune · 月の呼吸',          statut:'occupe', couleur:'#1a0a3a', icone:'🌙', img:'' },
+  { nom:'Doma',        jp:'童磨',         rang:'Lune Supérieure II',             element:'Art du Sang · Givre',                   statut:'libre',  couleur:'#0a2a4a', icone:'❄️', img:'' },
+  { nom:'Akaza',       jp:'猗窩座',       rang:'Lune Supérieure III',            element:'Art du Sang · Destruction',             statut:'occupe', couleur:'#5a0a0a', icone:'💢', img:'' },
+  { nom:'Hantengu',    jp:'半天狗',       rang:'Lune Supérieure IV',             element:'Art du Sang · Émotions',                statut:'libre',  couleur:'#3a1a0a', icone:'😱', img:'' },
+  { nom:'Gyokko',      jp:'玉壺',         rang:'Lune Supérieure V',              element:'Art du Sang · Vases',                   statut:'wl',     couleur:'#0a3a2a', icone:'🐟', img:'' },
+  { nom:'Daki',        jp:'堕姫',         rang:'Lune Supérieure VI',             element:'Art du Sang · Ceintures de Sang',       statut:'libre',  couleur:'#5a0a2a', icone:'🎀', img:'' },
+  { nom:'Gyutaro',     jp:'妓夫太郎',     rang:'Lune Supérieure VI (frère)',     element:'Art du Sang · Faucilles Empoisonnées',  statut:'libre',  couleur:'#3a0a1a', icone:'⚔️', img:'' },
+  { nom:'Kaigaku',     jp:'獪岳',         rang:'Lune Supérieure VI (alt.)',      element:'Souffle du Tonnerre Démoniaque',         statut:'wl',     couleur:'#0a0a4a', icone:'⚡', img:'' },
+  { nom:'Nakime',      jp:'鳴女',         rang:'Lune Supérieure IV (remplaç.)', element:'Art du Sang · Château Infini',           statut:'libre',  couleur:'#2a0a3a', icone:'🪕', img:'' },
+  { nom:'Rui',         jp:'累',           rang:'Lune Inférieure V',              element:'Art du Sang · Fils de Sang',            statut:'libre',  couleur:'#4a0a0a', icone:'🕸️', img:'' },
+  { nom:'Enmu',        jp:'魘夢',         rang:'Lune Inférieure I',              element:'Art du Sang · Sommeil & Rêves',         statut:'occupe', couleur:'#1a0a4a', icone:'💤', img:'' },
+  { nom:'Mukago',      jp:'零余子',       rang:'Lune Inférieure IV',             element:'Art du Sang · Explosions',              statut:'libre',  couleur:'#3a2a0a', icone:'💥', img:'' },
+  { nom:'Rokuro',      jp:'魘夢の幼体',   rang:'Lune Inférieure II',             element:'Art du Sang · Venin',                   statut:'libre',  couleur:'#1a3a0a', icone:'☠️', img:'' },
+  { nom:'Muzan Kibutsuji', jp:'鬼舞辻 無惨', rang:'Roi Démoniaque',             element:'Art du Sang · Métamorphose Absolue',    statut:'wl',     couleur:'#1a001a', icone:'👁️', img:'' },
 ];
 
+// ════════════════════════════════════════════════════════════════════════
+//  📌 SOUFFLES WHITELIST
+// ════════════════════════════════════════════════════════════════════════
 const WL_SOUFFLES = [
-  { icone:'💧', nom:'Souffle de l\'Eau', jp:'水の呼吸', desc:'Techniques fluides inspirées de l\'eau. Ce souffle est l\'un des plus fondamentaux, offrant 10 formes distinctes aux adeptes.', formateur:'GiuTomioka_Admin', actif: true },
-  { icone:'🔥', nom:'Souffle des Flammes', jp:'炎の呼吸', desc:'Techniques offensives brûlantes transmises de génération en génération par la famille Rengoku.', formateur:'VACANT', actif: false },
-  { icone:'🌙', nom:'Souffle de la Lune', jp:'月の呼吸', desc:'Souffle dérivé du Soleil, exclusif aux Lunes Supérieures démoniaques ayant conservé leur mémoire.', formateur:'Kokushibo_RP', actif: true },
-  { icone:'⚡', nom:'Souffle du Tonnerre', jp:'雷の呼吸', desc:'Vitesse absolue — le Tonnerre Premier transforme le corps en éclair pur. WL strictement contrôlée.', formateur:'ZenitsuSensei', actif: true },
-  { icone:'🌬️', nom:'Souffle du Vent', jp:'風の呼吸', desc:'Attaques circulaires dévastatrices. Accessibles uniquement après validation du Corps des Piliers.', formateur:'VACANT', actif: false },
-  { icone:'🪨', nom:'Souffle de la Roche', jp:'岩の呼吸', desc:'Défense absolue et frappes de masse. Seul Gyomei peut certifier les candidats au Pilier de la Roche.', formateur:'HimejimaSensei', actif: true },
-  { icone:'🌺', nom:'Souffle de l\'Amour', jp:'恋の呼吸', desc:'Souffle dérivé de la Flamme, exclusif à Mitsuri Kanroji. Requiert une souplesse corporelle exceptionnelle.', formateur:'KanrojiMitsuri', actif: true },
-  { icone:'🌊', nom:'Souffle de la Brume', jp:'霞の呼吸', desc:'Mouvements imprévisibles et tranchants comme le vent. Idéal pour la guerre d\'usure et la confusion.', formateur:'VACANT', actif: false },
+  { icone:'💧', nom:'Souffle de l\'Eau',      jp:'水の呼吸',  desc:'Techniques fluides en 10 formes. L\'un des souffles les plus accessibles mais redoutablement polyvalent.', formateur:'GiuTomioka_Admin', actif:true },
+  { icone:'🔥', nom:'Souffle des Flammes',    jp:'炎の呼吸',  desc:'Transmis de génération en génération par la famille Rengoku. Offensive dévastatrice.', formateur:'VACANT', actif:false },
+  { icone:'🌙', nom:'Souffle de la Lune',     jp:'月の呼吸',  desc:'Dérivé du Soleil, exclusif aux Lunes Supérieures démoniaques. WL extrêmement restreinte.', formateur:'Kokushibo_RP', actif:true },
+  { icone:'⚡', nom:'Souffle du Tonnerre',    jp:'雷の呼吸',  desc:'Vitesse absolue. Le Premier Tonnerre transforme le corps en éclair pur.', formateur:'ZenitsuSensei', actif:true },
+  { icone:'🌬️',nom:'Souffle du Vent',        jp:'風の呼吸',  desc:'Attaques circulaires dévastatrices, nécessite l\'aval du Corps des Piliers.', formateur:'VACANT', actif:false },
+  { icone:'🪨', nom:'Souffle de la Roche',   jp:'岩の呼吸',  desc:'Défense absolue et frappes titanesques. Seul Gyomei peut certifier les candidats.', formateur:'HimejimaSensei', actif:true },
+  { icone:'🌸', nom:'Souffle de l\'Amour',   jp:'恋の呼吸',  desc:'Dérivé de la Flamme, exclusif à Mitsuri. Nécessite une souplesse corporelle exceptionnelle.', formateur:'KanrojiMitsuri', actif:true },
+  { icone:'🌫️',nom:'Souffle de la Brume',   jp:'霞の呼吸',  desc:'Mouvements imprévisibles idéaux pour la confusion et la guerre d\'usure.', formateur:'VACANT', actif:false },
+  { icone:'🐍', nom:'Souffle du Serpent',    jp:'蛇の呼吸',  desc:'Trajectoires sinueuses et imprévues, développé par Obanai pour compenser sa vision partielle.', formateur:'IguroSensei', actif:true },
+  { icone:'🎵', nom:'Souffle du Son',         jp:'音の呼吸',  desc:'Attaques explosives basées sur l\'analyse des fréquences. Exclusif à Tengen Uzui.', formateur:'VACANT', actif:false },
+  { icone:'🦋', nom:'Souffle de l\'Insecte', jp:'蟲の呼吸',  desc:'Techniques au venin mortifères. Incompatible avec la découpe classique, exclusif à Shinobu.', formateur:'ShinobuSensei', actif:true },
+  { icone:'🌺', nom:'Souffle de la Fleur',   jp:'花の呼吸',  desc:'Dérivé du Souffle de l\'Eau, maîtrisé par Kanao Tsuyuri. Précision chirurgicale.', formateur:'KanaoRP', actif:true },
 ];
 
 const REGLES = [
-  { num:'01', titre:'Respect & RP sérieux', texte:'Le personnage est sacré. Toute interaction hors-RP non balisée (( )) est sanctionnée. Restez dans l\'univers Demon Slayer.' },
-  { num:'02', titre:'Candidature obligatoire', texte:'L\'accès aux rôles Piliers, Lunes et Souffles WL nécessite une candidature écrite validée par les admins.' },
-  { num:'03', titre:'Inactivité & rôles', texte:'Tout rôle non joué depuis 14 jours sans justification préalable revient libre automatiquement.' },
-  { num:'04', titre:'Conflits & disputes', texte:'Toute dispute in-game se règle par ticket Discord. Les jugements unilatéraux RP sont proscrits.' },
-  { num:'05', titre:'Godmode interdit', texte:'Aucun personnage n\'est invincible. Les combats suivent la hiérarchie canonique avec possibilité de vote admin.' },
-  { num:'06', titre:'WhiteList & formation', texte:'Un souffle WL ne peut être utilisé qu\'après avoir validé au minimum 3 sessions de formation avec le formateur référent.' },
+  { num:'01', titre:'Respect & RP sérieux', texte:'Le personnage est sacré. Toute interaction hors-RP non balisée (( )) est sanctionnée.' },
+  { num:'02', titre:'Candidature obligatoire', texte:'L\'accès aux rôles Piliers, Lunes et Souffles WL nécessite une candidature validée par les admins.' },
+  { num:'03', titre:'Inactivité & rôles', texte:'Tout rôle non joué depuis 14 jours sans justification revient libre automatiquement.' },
+  { num:'04', titre:'Conflits & disputes', texte:'Toute dispute in-game se règle par ticket Discord. Les jugements RP unilatéraux sont proscrits.' },
+  { num:'05', titre:'Godmode interdit', texte:'Aucun personnage n\'est invincible. Les combats suivent la hiérarchie canonique avec vote admin.' },
+  { num:'06', titre:'WhiteList & formation', texte:'Un souffle WL ne peut être utilisé qu\'après 3 sessions validées avec le formateur référent.' },
 ];
 
-// ─── RENDER ───────────────────────────────────────────────────────────────────
+// ════════════════════════════════════════════════════════════════════════
+//  🎨 RENDU
+// ════════════════════════════════════════════════════════════════════════
 function badgeHTML(statut) {
-  const map = {
-    libre:  { cls:'badge-libre',  txt:'● Libre' },
-    occupe: { cls:'badge-occupe', txt:'● Occupé' },
-    wl:     { cls:'badge-wl',     txt:'⬡ WL' },
-  };
+  const map = { libre:{cls:'badge-libre',txt:'● Libre'}, occupe:{cls:'badge-occupe',txt:'● Occupé'}, wl:{cls:'badge-wl',txt:'⬡ WL'} };
   const b = map[statut];
   return `<div class="char-badge ${b.cls}">${b.txt}</div>`;
 }
 
-function renderCards(data, containerId, isLune = false) {
-  const grid = document.getElementById(containerId);
-  grid.innerHTML = data.map(c => `
-    <div class="char-card${isLune ? ' lune' : ''}" data-statut="${c.statut}">
-      <img class="char-card-image" src="${c.img}" alt="${c.nom}" loading="lazy"
-           onerror="this.style.display='none';this.parentElement.style.background='rgba(30,10,20,0.8)'">
+function renderCards(data, containerId, isLune=false) {
+  document.getElementById(containerId).innerHTML = data.map(c => `
+    <div class="char-card${isLune?' lune':''}" data-statut="${c.statut}"
+         style="background:linear-gradient(160deg,${c.couleur}70 0%,#080208 75%);">
+      ${c.img ? `<img class="char-card-image" src="${c.img}" alt="${c.nom}" loading="lazy" onerror="this.remove();">` : ''}
+      <div class="card-icon-fallback">${c.icone}</div>
       <div class="char-card-overlay"></div>
       ${badgeHTML(c.statut)}
       <div class="char-card-body">
@@ -965,20 +361,15 @@ function renderCards(data, containerId, isLune = false) {
         <div class="char-name-jp">${c.jp}</div>
         <div class="char-element">${c.element}</div>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
 function renderWL() {
-  const grid = document.getElementById('wl-grid');
-  grid.innerHTML = WL_SOUFFLES.map(s => `
+  document.getElementById('wl-grid').innerHTML = WL_SOUFFLES.map(s => `
     <div class="wl-card">
       <div class="wl-souffle">
         <div class="wl-icon">${s.icone}</div>
-        <div>
-          <div class="wl-souffle-name">${s.nom}</div>
-          <div class="wl-souffle-jp">${s.jp}</div>
-        </div>
+        <div><div class="wl-souffle-name">${s.nom}</div><div class="wl-souffle-jp">${s.jp}</div></div>
       </div>
       <div class="wl-desc">${s.desc}</div>
       <div class="wl-formateur">
@@ -986,10 +377,9 @@ function renderWL() {
           <div class="wl-formateur-label">Formateur référent</div>
           <div class="wl-formateur-name">${s.actif ? s.formateur : 'Poste vacant'}</div>
         </div>
-        <div class="wl-status-dot ${s.actif ? 'dot-active' : 'dot-vacant'}"></div>
+        <div class="wl-status-dot ${s.actif?'dot-active':'dot-vacant'}"></div>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
 function renderRegles() {
@@ -998,75 +388,55 @@ function renderRegles() {
       <div class="regle-num">${r.num}</div>
       <div class="regle-title">${r.titre}</div>
       <div class="regle-text">${r.texte}</div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
 function updateStats() {
-  const all = [...PILIERS, ...LUNES];
-  document.getElementById('stat-libre').textContent   = all.filter(c=>c.statut==='libre').length;
-  document.getElementById('stat-occupe').textContent  = all.filter(c=>c.statut==='occupe').length;
-  document.getElementById('stat-wl').textContent      = all.filter(c=>c.statut==='wl').length;
+  const all = [...PILIERS,...LUNES];
+  document.getElementById('stat-libre').textContent      = all.filter(c=>c.statut==='libre').length;
+  document.getElementById('stat-occupe').textContent     = all.filter(c=>c.statut==='occupe').length;
+  document.getElementById('stat-wl').textContent         = all.filter(c=>c.statut==='wl').length;
   document.getElementById('stat-formateurs').textContent = WL_SOUFFLES.filter(s=>s.actif).length;
 }
 
-// ─── FILTER ───────────────────────────────────────────────────────────────────
 function filterCards(section, statut, btn) {
-  const gridId = section + '-grid';
-  const cards = document.querySelectorAll(`#${gridId} .char-card`);
-  cards.forEach(card => {
-    card.style.display = (statut === 'tous' || card.dataset.statut === statut) ? '' : 'none';
+  document.querySelectorAll(`#${section}-grid .char-card`).forEach(card => {
+    card.style.display = (statut==='tous'||card.dataset.statut===statut) ? '' : 'none';
   });
-  // Update active tab
-  const tabs = btn.parentElement.querySelectorAll('.tab-btn');
-  tabs.forEach(t => t.classList.remove('active'));
+  btn.parentElement.querySelectorAll('.tab-btn').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
 }
 
-// ─── COPY IP ──────────────────────────────────────────────────────────────────
 function copyIP() {
-  const ip = 'play.demonslayer-rp.fr:27015';
+  const ip = 'play.yufu.fr:27015';
   if (navigator.clipboard) {
     navigator.clipboard.writeText(ip).then(showToast);
   } else {
     const ta = document.createElement('textarea');
-    ta.value = ip;
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand('copy');
-    document.body.removeChild(ta);
-    showToast();
+    ta.value = ip; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); document.body.removeChild(ta); showToast();
   }
 }
 
 function showToast() {
   const t = document.getElementById('toast');
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
+  setTimeout(()=>t.classList.remove('show'), 3000);
 }
 
-// ─── PARTICLES ────────────────────────────────────────────────────────────────
 function createPetals() {
-  const container = document.getElementById('particles');
   const colors = ['rgba(255,77,125,0.5)','rgba(255,100,150,0.4)','rgba(200,80,120,0.3)','rgba(255,150,180,0.35)'];
-  for (let i = 0; i < 28; i++) {
+  for (let i=0;i<30;i++) {
     const p = document.createElement('div');
     p.className = 'petal';
-    const size = Math.random() * 8 + 5;
-    p.style.cssText = `
-      width:${size}px; height:${size*0.65}px;
-      left:${Math.random()*100}%;
-      background:${colors[Math.floor(Math.random()*colors.length)]};
-      animation-duration:${8+Math.random()*12}s;
-      animation-delay:${Math.random()*14}s;
-    `;
-    container.appendChild(p);
+    const sz = Math.random()*8+5;
+    p.style.cssText=`width:${sz}px;height:${sz*.65}px;left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*4)]};animation-duration:${8+Math.random()*12}s;animation-delay:${Math.random()*14}s;`;
+    document.getElementById('particles').appendChild(p);
   }
 }
 
-// ─── INIT ─────────────────────────────────────────────────────────────────────
-renderCards(PILIERS, 'piliers-grid', false);
-renderCards(LUNES,   'lunes-grid',   true);
+renderCards(PILIERS,'piliers-grid',false);
+renderCards(LUNES,'lunes-grid',true);
 renderWL();
 renderRegles();
 updateStats();
