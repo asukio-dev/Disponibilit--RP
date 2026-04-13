@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disponibilités RP | Demon Slayer Server</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- VARIABLES DE COULEUR (DA Rosée / Dark Sakura) --- */
+        :root {
+            --bg-color: #0d0609; /* Noir très légèrement rosé */
+            --primary-pink: #ff6b8b;
+            --light-pink: #ff9eaa;
+            --glow-pink: rgba(255, 107, 139, 0.4);
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 158, 170, 0.2);
+            
+            /* Statuts */
+            --status-open: #4ade80;
+            --status-limited: #facc15;
+            --status-full: #f87171;
+        }
+
+        /* --- RESET ET BASE --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            /* Motif de fond subtil */
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(255, 107, 139, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(255, 158, 170, 0.05) 0%, transparent 50%);
+        }
+
+        /* --- HEADER --- */
+        header {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+        }
+
+        h1 {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 3.5rem;
+            color: var(--light-pink);
+            text-shadow: 0 0 20px var(--glow-pink);
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+
+        p.subtitle {
+            font-size: 1.1rem;
+            color: #ccc;
+            margin-bottom: 2rem;
+        }
+
+        .server-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            text-decoration: none;
+        }
+
+        .btn-discord {
+            background-color: #5865F2;
+            color: white;
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
+        }
+
+        .btn-discord:hover {
+            background-color: #4752C4;
+            transform: translateY(-2px);
+        }
+
+        .btn-ip {
+            background-color: transparent;
+            color: var(--light-pink);
+            border: 1px solid var(--light-pink);
+            box-shadow: 0 0 15px rgba(255, 158, 170, 0.1);
+        }
+
+        .btn-ip:hover {
+            background-color: var(--glow-pink);
+            transform: translateY(-2px);
+        }
+
+        /* --- CONTENU PRINCIPAL (GRILLE) --- */
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .faction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        /* --- CARTES GLASSMORPHISM --- */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, var(--primary-pink), var(--light-pink));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-pink);
+            box-shadow: 0 10px 30px rgba(255, 107, 139, 0.15);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 1rem;
+        }
+
+        .card-title {
+            font-family: 'Noto Serif JP', serif;
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        .faction-icon {
+            font-size: 1.8rem;
+            color: var(--light-pink);
+        }
+
+        .roles-list {
+            list-style: none;
+        }
+
+        .role-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .role-item:last-child {
+            border-bottom: none;
+        }
+
+        .role-name {
+            font-weight: 300;
+        }
+
+        .role-slots {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .slots-count {
+            font-family: monospace;
+            font-size: 1.1rem;
+            color: #aaa;
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Couleurs des badges */
+        .open { background-color: rgba(74, 222, 128, 0.1); color: var(--status-open); border: 1px solid rgba(74, 222, 128, 0.3); }
+        .limited { background-color: rgba(250, 204, 21, 0.1); color: var(--status-limited); border: 1px solid rgba(250, 204, 21, 0.3); }
+        .full { background-color: rgba(248, 113, 113, 0.1); color: var(--status-full); border: 1px solid rgba(248, 113, 113, 0.3); }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--card-border);
+            margin-top: auto;
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--light-pink);
+            color: #000;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            transform: translateX(150%);
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            box-shadow: 0 4px 15px rgba(255, 158, 170, 0.4);
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="notification" id="copyToast">
+        <i class="fas fa-check-circle"></i> IP copiée dans le presse-papier !
+    </div>
+
+    <header>
+        <h1>DEMON SLAYER RP</h1>
+        <p class="subtitle">Disponibilités des places en temps réel</p>
+        
+        <div class="server-actions">
+            <a href="TON_LIEN_DISCORD_ICI" target="_blank" class="btn btn-discord">
+                <i class="fab fa-discord"></i> Rejoindre le Discord
+            </a>
+            <button class="btn btn-ip" onclick="copyIP('play.tonserveur.fr')">
+                <i class="fas fa-gamepad"></i> play.tonserveur.fr
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <div class="faction-grid">
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Armée des Pourfendeurs</h2>
+                    <i class="fas fa-khanda faction-icon"></i>
+                </div>
+                <ul class="roles-list">
+                    <li class="role-item">
+                        <span class="role-name">Mizunoto (Débutant)</span>
+                        <div class="role-slots">
+                            <span class="slots-count">∞/∞</span>
+                            <span class="status-badge open">Ouvert</span>
+                        </div>
+                    </li>
+                    <li class="role-item">
+                        <span class="role-name">Kinoe (Vétéran)</span>
+                        <div class="role-slots">
+                            <span class="slots-count">12/15</span>
+                            <span class="status-badge open">Ouvert</span>
+                        </div>
+                    </li>
+                    <li class="role-item">
+                        <span class="role-name">Tsuguko (Successeur)</span>
+                        <div class="role-slots">
+                            <span class="slots-count">3/5</span>
+                            <span class="status-badge limited">Limité</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Les Piliers (Hashira)</h2>
+                    <i class="fas fa-fire-flame-curved faction-icon"></i>
+                </div>
+                <ul class="roles-list">
+                    <li class="role-item">
+                        <span class="role-name">Pilier de l'Eau</span>
+                        <div class="role-slots">
+                            <span class="slots-count">1/1</span>
+                            <span class="status-badge full">Complet</span>
+                        </div>
+                    </li>
+                    <li class="role-item">
+                        <span class="role-name">Pilier du Feu</span>
+                        <div class="role-slots">
+                            <span class="slots-count">0/1</span>
+                            <span class="status-badge open">Ouvert</span>
+                        </div>
+                    </li>
+                    <li class="role-item">
+                        <span class="role-name">Pilier du Vent</span>
+                        <div class="role-slots">
+                            <span class="slots-count">1/1</span>
+                            <span class="status-badge full">Complet</span>
+                        </div>
+                    </li>
+                    <li class="role-item">
+                        <span class="role-name">Autres Souffles</span>
+                        <div class="role-slots">
+                            <span class="slots-count">4/6</span>
+                            <span class="status-badge limited">Limité</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Armée de Muzan</h2>
+                    <i class="fas fa-moon faction-icon"></i>
+                </div>
+                <ul class="roles-list">
+                    <li class="role-item">
+                        <span class="role-name">Démon Basique</span>
+                        <div class="role-slots">
+                            <span class="slots-count">24/30</span>
+                            <span class="status-badge open">Ouvert</span>
+                        </div>
+                    </li>
+                    <li class="role-item">
+                        <span class="role-name">Démon Sanguinaire (Pouvoir)</span>
+                        <div class="role-slots">
+                            <span class="slots-count">8/10</span>
+                            <span class="status-badge limited">Limité</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Lunes Démoniaques</h2>
+                    <i class="fas fa-eye faction-icon"></i>
+                </div>
+                <ul class="roles-list">
+                    <li class="role-item">
+                        <span class="role-name">Lunes Inférieures</span>
+                        <div class="role-slots">
+                            <span class="slots-count">5/6</span>
+                            <span class="status-badge limited">Limité</span>
+                        </div>
+                    </li>
+                    <li class="role-item">
+                        <span class="role-name">Lunes Supérieures</span>
+                        <div class="role-slots">
+                            <span class="slots-count">6/6</span>
+                            <span class="status-badge full">Complet</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Demon Slayer RP - Serveur Gmod. Propulsé par la communauté.</p>
+    </footer>
+
+    <script>
+        function copyIP(ip) {
+            navigator.clipboard.writeText(ip).then(function() {
+                const toast = document.getElementById('copyToast');
+                toast.classList.add('show');
+                
+                // Cache la notification après 3 secondes
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }).catch(function(err) {
+                console.error('Erreur lors de la copie :', err);
+            });
+        }
+    </script>
+
+</body>
+</html>
