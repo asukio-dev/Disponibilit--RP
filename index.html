@@ -3,414 +3,302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Disponibilités RP | Demon Slayer Server</title>
+    <title>DEMON SLAYER RP | DISPONIBILITÉS</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@900&family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- VARIABLES DE COULEUR (DA Rosée / Dark Sakura) --- */
         :root {
-            --bg-color: #0d0609; /* Noir très légèrement rosé */
-            --primary-pink: #ff6b8b;
-            --light-pink: #ff9eaa;
-            --glow-pink: rgba(255, 107, 139, 0.4);
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --card-border: rgba(255, 158, 170, 0.2);
-            
-            /* Statuts */
-            --status-open: #4ade80;
-            --status-limited: #facc15;
-            --status-full: #f87171;
+            --bg: #050203;
+            --card-bg: rgba(15, 8, 12, 0.9);
+            --pink: #ff4d7d;
+            --pink-light: #ffb3c6;
+            --pink-glow: 0 0 20px rgba(255, 77, 125, 0.4);
+            --wl-color: #a855f7;
+            --open-color: #22c55e;
+            --full-color: #ef4444;
         }
 
-        /* --- RESET ET BASE --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* Scrollbar Stylisée */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--pink); border-radius: 10px; }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-color);
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            background-color: var(--bg);
+            color: #fff;
+            line-height: 1.6;
             overflow-x: hidden;
-            /* Motif de fond subtil */
-            background-image: 
-                radial-gradient(circle at 15% 50%, rgba(255, 107, 139, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 85% 30%, rgba(255, 158, 170, 0.05) 0%, transparent 50%);
+        }
+
+        /* --- BACKGROUND ANIMÉ --- */
+        .bg-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 77, 125, 0.05) 0%, transparent 70%);
+            z-index: -1;
         }
 
         /* --- HEADER --- */
         header {
-            text-align: center;
-            padding: 4rem 2rem 2rem;
-        }
-
-        h1 {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 3.5rem;
-            color: var(--light-pink);
-            text-shadow: 0 0 20px var(--glow-pink);
-            margin-bottom: 0.5rem;
-            letter-spacing: 2px;
-        }
-
-        p.subtitle {
-            font-size: 1.1rem;
-            color: #ccc;
-            margin-bottom: 2rem;
-        }
-
-        .server-actions {
+            height: 60vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
             align-items: center;
-            gap: 10px;
-            border: none;
-            text-decoration: none;
+            text-align: center;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), var(--bg)), 
+                        url('https://i.pinimg.com/originals/f3/04/70/f30470695da23849310bc9986612dc0d.jpg');
+            background-size: cover;
+            background-position: center;
+            border-bottom: 2px solid var(--pink);
         }
 
-        .btn-discord {
-            background-color: #5865F2;
-            color: white;
-            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
+        h1 { 
+            font-family: 'Noto Serif JP', serif; 
+            font-size: clamp(3rem, 8vw, 5rem); 
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-shadow: 0 0 30px var(--pink);
         }
 
-        .btn-discord:hover {
-            background-color: #4752C4;
-            transform: translateY(-2px);
+        .header-btns { margin-top: 30px; display: flex; gap: 20px; }
+        .btn {
+            padding: 12px 30px; border-radius: 50px; text-decoration: none;
+            font-weight: bold; transition: 0.3s; text-transform: uppercase; font-size: 0.9rem;
+        }
+        .btn-main { background: var(--pink); color: white; box-shadow: var(--pink-glow); }
+        .btn-main:hover { transform: scale(1.05); filter: brightness(1.2); }
+
+        /* --- SECTION CONTENU --- */
+        section { padding: 80px 5%; max-width: 1400px; margin: 0 auto; }
+        .section-title {
+            font-family: 'Noto Serif JP', serif; font-size: 3rem; text-align: center;
+            margin-bottom: 60px; color: var(--pink-light); position: relative;
         }
 
-        .btn-ip {
-            background-color: transparent;
-            color: var(--light-pink);
-            border: 1px solid var(--light-pink);
-            box-shadow: 0 0 15px rgba(255, 158, 170, 0.1);
-        }
-
-        .btn-ip:hover {
-            background-color: var(--glow-pink);
-            transform: translateY(-2px);
-        }
-
-        /* --- CONTENU PRINCIPAL (GRILLE) --- */
-        main {
-            flex: 1;
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .faction-grid {
+        /* --- GRILLE DES PERSONNAGES --- */
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 35px;
         }
 
-        /* --- CARTES GLASSMORPHISM --- */
         .card {
             background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 2rem;
-            transition: all 0.4s ease;
-            position: relative;
+            border-radius: 20px;
             overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 4px;
-            background: linear-gradient(90deg, var(--primary-pink), var(--light-pink));
-            opacity: 0;
-            transition: opacity 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-pink);
-            box-shadow: 0 10px 30px rgba(255, 107, 139, 0.15);
+            transform: translateY(-15px) rotate(1deg);
+            border-color: var(--pink);
+            box-shadow: 0 20px 40px rgba(255, 77, 125, 0.2);
         }
 
-        .card:hover::before {
-            opacity: 1;
+        .card-img-box {
+            height: 400px; width: 100%; position: relative; overflow: hidden;
         }
 
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 1rem;
+        .card-img-box img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: 0.5s;
         }
 
-        .card-title {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 1.5rem;
-            color: #fff;
+        .card:hover .card-img-box img { transform: scale(1.1); }
+
+        .status-float {
+            position: absolute; top: 15px; right: 15px;
+            padding: 5px 15px; border-radius: 10px; font-size: 0.75rem;
+            font-weight: 800; text-transform: uppercase; z-index: 10;
+            backdrop-filter: blur(5px);
         }
 
-        .faction-icon {
-            font-size: 1.8rem;
-            color: var(--light-pink);
+        .card-body { padding: 25px; position: relative; }
+        .card-jp { font-family: 'Noto Serif JP', serif; color: var(--pink); font-size: 0.9rem; }
+        .card-name { font-size: 1.8rem; margin-bottom: 5px; }
+        .card-role { color: #aaa; font-size: 0.9rem; letter-spacing: 1px; }
+
+        /* --- SOUFFLES & FORMATEURS --- */
+        .breath-card {
+            background: rgba(255,255,255,0.03); border-left: 5px solid var(--pink);
+            padding: 25px; border-radius: 10px; margin-bottom: 20px;
+            display: flex; justify-content: space-between; align-items: center;
         }
 
-        .roles-list {
-            list-style: none;
-        }
+        .breath-info h3 { font-size: 1.5rem; color: #fff; }
+        .breath-info p { color: #777; font-size: 0.9rem; }
 
-        .role-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
+        .trainer { text-align: right; }
+        .trainer-name { color: var(--wl-color); font-weight: bold; font-size: 1.1rem; }
 
-        .role-item:last-child {
-            border-bottom: none;
-        }
+        /* Statuts Couleurs */
+        .s-full { background: rgba(239, 68, 68, 0.2); color: var(--full-color); border: 1px solid var(--full-color); }
+        .s-open { background: rgba(34, 197, 94, 0.2); color: var(--open-color); border: 1px solid var(--open-color); }
+        .s-wl { background: rgba(168, 85, 247, 0.2); color: var(--wl-color); border: 1px solid var(--wl-color); }
 
-        .role-name {
-            font-weight: 300;
-        }
-
-        .role-slots {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .slots-count {
-            font-family: monospace;
-            font-size: 1.1rem;
-            color: #aaa;
-        }
-
-        .status-badge {
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Couleurs des badges */
-        .open { background-color: rgba(74, 222, 128, 0.1); color: var(--status-open); border: 1px solid rgba(74, 222, 128, 0.3); }
-        .limited { background-color: rgba(250, 204, 21, 0.1); color: var(--status-limited); border: 1px solid rgba(250, 204, 21, 0.3); }
-        .full { background-color: rgba(248, 113, 113, 0.1); color: var(--status-full); border: 1px solid rgba(248, 113, 113, 0.3); }
-
-        /* --- FOOTER --- */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: #666;
-            font-size: 0.9rem;
-            border-top: 1px solid var(--card-border);
-            margin-top: auto;
-        }
-
-        .notification {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--light-pink);
-            color: #000;
-            padding: 15px 25px;
-            border-radius: 8px;
-            font-weight: 600;
-            transform: translateX(150%);
-            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            box-shadow: 0 4px 15px rgba(255, 158, 170, 0.4);
-        }
-
-        .notification.show {
-            transform: translateX(0);
-        }
-
+        footer { text-align: center; padding: 50px; opacity: 0.5; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
-    <div class="notification" id="copyToast">
-        <i class="fas fa-check-circle"></i> IP copiée dans le presse-papier !
-    </div>
+    <div class="bg-overlay"></div>
 
     <header>
+        <p style="letter-spacing: 5px; color: var(--pink-light);">BIENVENUE SUR LE SITE OFFICIEL</p>
         <h1>DEMON SLAYER RP</h1>
-        <p class="subtitle">Disponibilités des places en temps réel</p>
-        
-        <div class="server-actions">
-            <a href="TON_LIEN_DISCORD_ICI" target="_blank" class="btn btn-discord">
-                <i class="fab fa-discord"></i> Rejoindre le Discord
-            </a>
-            <button class="btn btn-ip" onclick="copyIP('play.tonserveur.fr')">
-                <i class="fas fa-gamepad"></i> play.tonserveur.fr
-            </button>
+        <div class="header-btns">
+            <a href="#" class="btn btn-main">Rejoindre le Discord</a>
+            <a href="#piliers" class="btn" style="border: 1px solid white; color: white;">Voir les Rôles</a>
         </div>
     </header>
 
-    <main>
-        <div class="faction-grid">
+    <section id="piliers">
+        <h2 class="section-title">Les Neuf Piliers</h2>
+        <div class="grid">
 
             <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">Armée des Pourfendeurs</h2>
-                    <i class="fas fa-khanda faction-icon"></i>
+                <span class="status-float s-full">Occupé</span>
+                <div class="card-img-box">
+                    <img src="https://i.pinimg.com/564x/0a/63/03/0a6303274291f4a460912444988647ba.jpg">
                 </div>
-                <ul class="roles-list">
-                    <li class="role-item">
-                        <span class="role-name">Mizunoto (Débutant)</span>
-                        <div class="role-slots">
-                            <span class="slots-count">∞/∞</span>
-                            <span class="status-badge open">Ouvert</span>
-                        </div>
-                    </li>
-                    <li class="role-item">
-                        <span class="role-name">Kinoe (Vétéran)</span>
-                        <div class="role-slots">
-                            <span class="slots-count">12/15</span>
-                            <span class="status-badge open">Ouvert</span>
-                        </div>
-                    </li>
-                    <li class="role-item">
-                        <span class="role-name">Tsuguko (Successeur)</span>
-                        <div class="role-slots">
-                            <span class="slots-count">3/5</span>
-                            <span class="status-badge limited">Limité</span>
-                        </div>
-                    </li>
-                </ul>
+                <div class="card-body">
+                    <p class="card-jp">冨岡 義勇</p>
+                    <h3 class="card-name">Giyu Tomioka</h3>
+                    <p class="card-role">PILIER DE L'EAU</p>
+                    <p style="margin-top:10px; font-size:0.8rem; color: var(--pink);">Joueur: <span style="color:white">Pseudo_RP</span></p>
+                </div>
             </div>
 
             <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">Les Piliers (Hashira)</h2>
-                    <i class="fas fa-fire-flame-curved faction-icon"></i>
+                <span class="status-float s-wl">Test WL</span>
+                <div class="card-img-box">
+                    <img src="https://i.pinimg.com/564x/8e/3c/37/8e3c373bc07530666014526017ec916c.jpg">
                 </div>
-                <ul class="roles-list">
-                    <li class="role-item">
-                        <span class="role-name">Pilier de l'Eau</span>
-                        <div class="role-slots">
-                            <span class="slots-count">1/1</span>
-                            <span class="status-badge full">Complet</span>
-                        </div>
-                    </li>
-                    <li class="role-item">
-                        <span class="role-name">Pilier du Feu</span>
-                        <div class="role-slots">
-                            <span class="slots-count">0/1</span>
-                            <span class="status-badge open">Ouvert</span>
-                        </div>
-                    </li>
-                    <li class="role-item">
-                        <span class="role-name">Pilier du Vent</span>
-                        <div class="role-slots">
-                            <span class="slots-count">1/1</span>
-                            <span class="status-badge full">Complet</span>
-                        </div>
-                    </li>
-                    <li class="role-item">
-                        <span class="role-name">Autres Souffles</span>
-                        <div class="role-slots">
-                            <span class="slots-count">4/6</span>
-                            <span class="status-badge limited">Limité</span>
-                        </div>
-                    </li>
-                </ul>
+                <div class="card-body">
+                    <p class="card-jp">煉獄 杏寿郎</p>
+                    <h3 class="card-name">Kyojuro Rengoku</h3>
+                    <p class="card-role">PILIER DU FEU</p>
+                    <p style="margin-top:10px; font-size:0.8rem; color: var(--pink);">Disponibilité: <span style="color:white">Candidature</span></p>
+                </div>
             </div>
 
             <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">Armée de Muzan</h2>
-                    <i class="fas fa-moon faction-icon"></i>
+                <span class="status-float s-open">Libre</span>
+                <div class="card-img-box">
+                    <img src="https://i.pinimg.com/564x/e7/71/24/e771249969178f56740049454157973a.jpg">
                 </div>
-                <ul class="roles-list">
-                    <li class="role-item">
-                        <span class="role-name">Démon Basique</span>
-                        <div class="role-slots">
-                            <span class="slots-count">24/30</span>
-                            <span class="status-badge open">Ouvert</span>
-                        </div>
-                    </li>
-                    <li class="role-item">
-                        <span class="role-name">Démon Sanguinaire (Pouvoir)</span>
-                        <div class="role-slots">
-                            <span class="slots-count">8/10</span>
-                            <span class="status-badge limited">Limité</span>
-                        </div>
-                    </li>
-                </ul>
+                <div class="card-body">
+                    <p class="card-jp">胡蝶 しのぶ</p>
+                    <h3 class="card-name">Shinobu Kocho</h3>
+                    <p class="card-role">PILIER DE L'INSECTE</p>
+                </div>
             </div>
 
             <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">Lunes Démoniaques</h2>
-                    <i class="fas fa-eye faction-icon"></i>
+                <span class="status-float s-open">Libre</span>
+                <div class="card-img-box">
+                    <img src="https://i.pinimg.com/564x/89/34/00/893400030501a3070f803f2697843383.jpg">
                 </div>
-                <ul class="roles-list">
-                    <li class="role-item">
-                        <span class="role-name">Lunes Inférieures</span>
-                        <div class="role-slots">
-                            <span class="slots-count">5/6</span>
-                            <span class="status-badge limited">Limité</span>
-                        </div>
-                    </li>
-                    <li class="role-item">
-                        <span class="role-name">Lunes Supérieures</span>
-                        <div class="role-slots">
-                            <span class="slots-count">6/6</span>
-                            <span class="status-badge full">Complet</span>
-                        </div>
-                    </li>
-                </ul>
+                <div class="card-body">
+                    <p class="card-jp">宇髄 天元</p>
+                    <h3 class="card-name">Tengen Uzui</h3>
+                    <p class="card-role">PILIER DU SON</p>
+                </div>
             </div>
 
         </div>
-    </main>
+    </section>
+
+    <section id="lunes" style="background: rgba(255, 77, 125, 0.02);">
+        <h2 class="section-title">Les Lunes Supérieures</h2>
+        <div class="grid">
+
+            <div class="card">
+                <span class="status-float s-full">Occupé</span>
+                <div class="card-img-box">
+                    <img src="https://i.pinimg.com/564x/5a/b1/68/5ab168470a2f4c424a18012f458e0a7e.jpg">
+                </div>
+                <div class="card-body">
+                    <p class="card-jp">黒死牟</p>
+                    <h3 class="card-name">Kokushibo</h3>
+                    <p class="card-role">LUNE SUPÉRIEURE I</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="status-float s-wl">WL Uniquement</span>
+                <div class="card-img-box">
+                    <img src="https://i.pinimg.com/564x/72/7a/12/727a1262f7903565f492984587630713.jpg">
+                </div>
+                <div class="card-body">
+                    <p class="card-jp">猗窩座</p>
+                    <h3 class="card-name">Akaza</h3>
+                    <p class="card-role">LUNE SUPÉRIEURE III</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="status-float s-open">Libre</span>
+                <div class="card-img-box">
+                    <img src="https://i.pinimg.com/564x/6c/e0/7d/6ce07d377f0a67232e0225d30906236b.jpg">
+                </div>
+                <div class="card-body">
+                    <p class="card-jp">童磨</p>
+                    <h3 class="card-name">Douma</h3>
+                    <p class="card-role">LUNE SUPÉRIEURE II</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="souffles">
+        <h2 class="section-title">Souffles & Formateurs WL</h2>
+        
+        <div class="breath-card">
+            <div class="breath-info">
+                <h3>Souffle de la Foudre (Kaminari)</h3>
+                <p>Vitesse divine et attaques foudroyantes. Test de vitesse requis.</p>
+            </div>
+            <div class="trainer">
+                <p style="font-size: 0.7rem; color: #555;">FORMATEUR ACTUEL</p>
+                <p class="trainer-name">Kaigaku_Joueur</p>
+            </div>
+        </div>
+
+        <div class="breath-card">
+            <div class="breath-info">
+                <h3>Souffle du Soleil (Hinokami Kagura)</h3>
+                <p>Souffle originel. Uniquement via Event ou WL Légendaire.</p>
+            </div>
+            <div class="trainer">
+                <p style="font-size: 0.7rem; color: #555;">FORMATEUR ACTUEL</p>
+                <p class="trainer-name">Indisponible</p>
+            </div>
+        </div>
+
+        <div class="breath-card">
+            <div class="breath-info">
+                <h3>Souffle de la Brume (Kasumi)</h3>
+                <p>Mouvements obscurs et imprévisibles.</p>
+            </div>
+            <div class="trainer">
+                <p style="font-size: 0.7rem; color: #555;">FORMATEUR ACTUEL</p>
+                <p class="trainer-name">Poste Libre</p>
+            </div>
+        </div>
+
+    </section>
 
     <footer>
-        <p>&copy; 2026 Demon Slayer RP - Serveur Gmod. Propulsé par la communauté.</p>
+        <p>DEMON SLAYER RP &copy; 2026 - Créé avec passion pour la communauté Gmod</p>
     </footer>
-
-    <script>
-        function copyIP(ip) {
-            navigator.clipboard.writeText(ip).then(function() {
-                const toast = document.getElementById('copyToast');
-                toast.classList.add('show');
-                
-                // Cache la notification après 3 secondes
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 3000);
-            }).catch(function(err) {
-                console.error('Erreur lors de la copie :', err);
-            });
-        }
-    </script>
 
 </body>
 </html>
